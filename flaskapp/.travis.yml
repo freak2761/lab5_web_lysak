@@ -3,3 +3,24 @@ install:
  - pip3 install flask
 script:
  - python3 ./flaskapp/some_app.py
+
+language: node_js
+node_js:
+  - "stable"
+notifications:
+  email: false
+
+cache:
+  directories:
+  - node_modules
+
+script:
+  npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github-token: $GITHUB_TOKEN
+  local_dir: build
+  on:
+    branch: master
